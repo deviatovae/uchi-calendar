@@ -3,6 +3,7 @@ import theme from '../theme.ts';
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 import styled from 'styled-components';
 import moment from 'moment';
+import { useState } from 'react';
 
 const Bar = styled.div`
   width: 100%;
@@ -65,10 +66,17 @@ const Date = styled.div`
 
 export const CalendarBar = () => {
   const now = moment();
-  const todayDate = +now.format('DD');
-  const date = now.format('DD MMMM YYYY');
-  const weekStart = now.startOf('week').format('DD');
-  const week = new Array(7).fill(weekStart).map((date, index) => +date + index);
+  const [weekStart, setWeekStart] = useState(now.startOf('week'))
+  const curDate = now.format('DD MMMM YYYY');
+  const week = new Array(7).fill(weekStart).map((_, index) => weekStart.clone().add(index, 'day'));
+
+  const updateWeekStart = (isForward = false) => {
+    if (isForward) {
+      setWeekStart(weekStart.clone().subtract(1, 'week'));
+      return;
+    }
+    setWeekStart(weekStart.clone().add(1, 'week'));
+  }
 
   return (
     <Bar>
@@ -84,12 +92,12 @@ export const CalendarBar = () => {
       </List>
       <List>
         <ListItem/>
-        {week.map((day, i) => <Day key={i} isToday={todayDate === day}>{day}</Day>)}
+        {week.map((day, i) => <Day key={i} isToday={!now.diff(day, 'day')}>{day.format('D')}</Day>)}
       </List>
       <List isDate>
-        <ArrowBefore fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} />
-        <Date>{date}</Date>
-        <ArrowNext fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} />
+        <ArrowBefore fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} onClick={() => updateWeekStart()}/>
+        <Date>{curDate}</Date>
+        <ArrowNext fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} onClick={() => updateWeekStart(true)}/>
       </List>
     </Bar>
   )
