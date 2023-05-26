@@ -14,6 +14,7 @@ const List = styled.div<{isDate?: boolean}>`
   display: ${({isDate}) => isDate ? 'flex' : 'grid' };
   align-items: center;
   justify-content: center;
+  padding: 5px 0;
   grid-template-columns: repeat(8, 1fr);
   grid-auto-rows: minmax(0, 1fr);
   user-select: none;
@@ -23,9 +24,6 @@ const ListItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 50px;
-  max-height: 50px;
-  aspect-ratio: 1 / 1;
   text-transform: uppercase;
 `;
 
@@ -45,16 +43,27 @@ const ArrowNext = styled(NavigateNextOutlinedIcon)`
 
 
 const Day = styled(ListItem)<{ isToday : boolean }>`
+  max-width: 50px;
+  max-height: 50px;
+  width: 100%;
+  height: 100%;
   background-color: ${({ isToday }) => isToday ? theme.colors.highlight : ''};
   color: ${({ isToday }) => isToday ? theme.colors.bgMain : ''};
-  padding: 4px;
   border-radius: 50%;
+  aspect-ratio: 1/1;
   
   &:hover {
     cursor: pointer;
     background-color: ${({ isToday }) => !isToday ? theme.colors.highlight : ''};
     color: ${({ isToday }) => !isToday ? theme.colors.bgMain : ''};
   }
+`;
+
+const DayWrapper = styled(ListItem)`
+  width: 100%;
+  height: 100%;
+  max-height: 60px;
+  aspect-ratio: 1/1;
 `;
 
 const Date = styled.div`
@@ -89,7 +98,7 @@ export const CalendarBar = () => {
       </List>
       <List>
         <ListItem/>
-        {week.map((day, i) => <Day key={i} isToday={!now.diff(day, 'day')}>{day.format('D')}</Day>)}
+        {week.map((day, i) => <DayWrapper key={i}><Day isToday={!now.diff(day, 'day')}>{day.format('D')}</Day></DayWrapper>)}
       </List>
       <List isDate>
         <ArrowBefore fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} onClick={() => updateWeekStart()}/>
