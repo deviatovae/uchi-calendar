@@ -5,6 +5,7 @@ const theme = {
     bgMain: '#fff',
     bgSecondary: '#dadada',
     bgCells: '#ced1f5',
+    bgCellsHover: '#a6abf5',
     highlight: '#b61f13',
     highlightHover: '#e86b66',
 

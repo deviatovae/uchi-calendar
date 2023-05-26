@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { EventCell, TimeCell } from './Cell.tsx';
+import { useCalendarContext } from './CalendarContext.tsx';
 
 const PanelWrapper = styled.div`
   height: 100%;
@@ -16,12 +17,23 @@ const PanelContent = styled.div`
 `;
 
 export const CalendarPanel = () => {
-  const cells = new Array(192).fill('')
+  const cells = new Array(192).fill('');
+  const { weekStart } = useCalendarContext();
+
   return (
     <PanelWrapper>
       <PanelContent>
         {cells.map((_, i) => {
-          return i % 8 === 0 ? <TimeCell key={i} hour={i / 8} /> : <EventCell key={i} />;
+          if (i % 8 === 0) {
+            return <TimeCell key={i} hour={i / 8} />
+          }
+
+          const dateTime = weekStart
+            .clone()
+            .add((i-1) % 8, 'day')
+            .add(Math.trunc(i / 8), 'hour');
+
+          return <EventCell dateTime={dateTime} key={i} />;
         } )}
       </PanelContent>
     </PanelWrapper>

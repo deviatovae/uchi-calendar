@@ -12,9 +12,10 @@ const Bar = styled.div`
 
 const List = styled.div<{isDate?: boolean}>`
   display: ${({isDate}) => isDate ? 'flex' : 'grid' };
+  margin-left: ${({isDate}) => isDate ? '92.5px' : '' };
   align-items: center;
-  justify-content: center;
-  padding: 5px 0;
+  justify-content: ${({isDate}) => isDate ? 'space-between' : 'center' };
+  padding: ${({isDate}) => isDate ? '5px 20px' : '10px 0 5px 0' };
   grid-template-columns: repeat(8, 1fr);
   grid-auto-rows: minmax(0, 1fr);
   user-select: none;
@@ -51,12 +52,6 @@ const Day = styled(ListItem)<{ isToday : boolean }>`
   color: ${({ isToday }) => isToday ? theme.colors.bgMain : ''};
   border-radius: 50%;
   aspect-ratio: 1/1;
-  
-  &:hover {
-    cursor: pointer;
-    background-color: ${({ isToday }) => !isToday ? theme.colors.highlight : ''};
-    color: ${({ isToday }) => !isToday ? theme.colors.bgMain : ''};
-  }
 `;
 
 const DayWrapper = styled(ListItem)`
