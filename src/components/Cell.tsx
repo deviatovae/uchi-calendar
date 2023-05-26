@@ -3,10 +3,7 @@ import theme from '../theme.ts';
 
 const CellItem = styled.div`
   display: flex;
-  min-width: 65px;
-  min-height: 80px;
-  width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
 `;
 
 const ECell = styled(CellItem)`
@@ -29,10 +26,6 @@ const TCell = styled(CellItem)`
   display: flex;
   align-items: start;
   justify-content: end;
-  min-width: 65px;
-  min-height: 80px;
-  width: 100%;
-  height: 100%;
 `;
 
 const Time = styled.span`
@@ -53,7 +46,7 @@ export const EventCell = () => {
 interface TimeCellProps {
   hour: number
 }
-export const TimeCell = ({ hour }:TimeCellProps) => {
+export const TimeCell = ({ hour }: TimeCellProps) => {
   return (
     <TCell>
       <Time>{hour.toString().padStart(2, '0')}:00</Time>

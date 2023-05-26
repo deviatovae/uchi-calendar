@@ -1,19 +1,14 @@
 import theme from '../theme.ts';
 import AddIcon from '@mui/icons-material/Add';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { CalendarBar } from './CalendarBar.tsx';
 import { CalendarPanel } from './CalendarPanel.tsx';
-
-export const FlxCenter = css`
-  display: flex;
-  align-items: center;
-  width: 100%;
-`;
+import { FlxCenter } from '../styles.ts';
 
 const CalendarWrapper = styled.div`
   ${FlxCenter};
   margin: 0 auto;
-  min-height: 100vh;
+  flex: 1 1 auto;
   max-width: ${theme.contentMaxWidth};
   min-width: ${theme.contentMinWidth};
   background-color: ${theme.colors.bgMain};
@@ -32,6 +27,7 @@ const CalendarHeader = styled.div`
   padding: 0 50px;
   justify-content: space-between;
   height: ${theme.headerHeight};
+  transition: 0.2s all;
   @media (max-width: 400px) {
     padding: 10px;
   }
