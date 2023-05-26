@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { FlxCenter } from '../styles.ts';
 import theme from '../theme.ts';
+import { CalendarContext } from './CalendarContext.tsx';
+import { useContext } from 'react';
 
 const BottomPanel = styled.div`
   ${FlxCenter};
   background-color: ${theme.colors.bgSecondary};
-`
+`;
 
 const BottomPanelContent = styled.div`
   ${FlxCenter};
@@ -16,12 +18,25 @@ const BottomPanelContent = styled.div`
   justify-content: space-between;
   color: ${theme.colors.highlight};
   font-size: 1.1rem;
+  user-select: none;
+  
+  & > span {
+    padding: 7px;
+    &:hover {
+      cursor: pointer;
+      background-color: ${theme.colors.highlight};
+      color: ${theme.colors.bgMain};
+      border-radius: 10px;
+      transition: background-color 0.3s ease-in-out;
+    }
+  }
 `
 export const Footer = () => {
+  const { setToday } = useContext(CalendarContext);
   return (
     <BottomPanel>
       <BottomPanelContent>
-        <span>Today</span>
+        <span onClick={setToday}>Today</span>
       </BottomPanelContent>
     </BottomPanel>
   )

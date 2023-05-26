@@ -5,6 +5,7 @@ import { CalendarBar } from './CalendarBar.tsx';
 import { CalendarPanel } from './CalendarPanel.tsx';
 import { FlxCenter } from '../styles.ts';
 import { Footer } from './Footer.tsx';
+import { CalendarProvider } from './CalendarContext.tsx';
 
 const CalendarWrapper = styled.div`
   ${FlxCenter};
@@ -42,19 +43,27 @@ const HeaderTitle = styled.h1`
   color: ${theme.colors.textMain};
 `;
 
+const AddEventIcon = styled(AddIcon)`
+  &:hover {
+    cursor: pointer;
+    fill: ${theme.colors.highlightHover};
+  }
+`;
 
 export const Calendar = () => {
   return (
-    <CalendarWrapper>
-      <CalendarContent>
-        <CalendarHeader>
-          <HeaderTitle>Interview Calendar</HeaderTitle>
-          <AddIcon fontSize='large' sx={{ fill: ` ${theme.colors.highlight}` }} />
-        </CalendarHeader>
-        <CalendarBar />
-        <CalendarPanel />
-        <Footer />
-      </CalendarContent>
-    </CalendarWrapper>
+    <CalendarProvider>
+      <CalendarWrapper>
+        <CalendarContent>
+          <CalendarHeader>
+            <HeaderTitle>Interview Calendar</HeaderTitle>
+            <AddEventIcon fontSize='large' sx={{ fill: ` ${theme.colors.highlight}` }} />
+          </CalendarHeader>
+          <CalendarBar />
+          <CalendarPanel />
+          <Footer />
+        </CalendarContent>
+      </CalendarWrapper>
+    </CalendarProvider>
   );
 };

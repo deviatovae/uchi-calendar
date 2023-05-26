@@ -2,8 +2,8 @@ import NavigateBeforeOutlinedIcon from '@mui/icons-material/NavigateBeforeOutlin
 import theme from '../theme.ts';
 import NavigateNextOutlinedIcon from '@mui/icons-material/NavigateNextOutlined';
 import styled from 'styled-components';
-import moment from 'moment';
-import { useState } from 'react';
+import { useCalendarContext } from './CalendarContext.tsx';
+import { useCallback } from 'react';
 
 const Bar = styled.div`
   width: 100%;
@@ -65,18 +65,15 @@ const Date = styled.div`
 `;
 
 export const CalendarBar = () => {
-  const now = moment();
-  const [weekStart, setWeekStart] = useState(now.startOf('week'))
-  const curDate = now.format('DD MMMM YYYY');
-  const week = new Array(7).fill(weekStart).map((_, index) => weekStart.clone().add(index, 'day'));
+  const { now, week, weekStart, setWeekStart } = useCalendarContext();
 
-  const updateWeekStart = (isForward = false) => {
+  const updateWeekStart = useCallback((isForward = false) => {
     if (isForward) {
       setWeekStart(weekStart.clone().subtract(1, 'week'));
       return;
     }
     setWeekStart(weekStart.clone().add(1, 'week'));
-  }
+  }, [setWeekStart, weekStart])
 
   return (
     <Bar>
@@ -96,7 +93,7 @@ export const CalendarBar = () => {
       </List>
       <List isDate>
         <ArrowBefore fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} onClick={() => updateWeekStart()}/>
-        <Date>{curDate}</Date>
+        <Date>{now.format('DD MMMM YYYY')}</Date>
         <ArrowNext fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} onClick={() => updateWeekStart(true)}/>
       </List>
     </Bar>
