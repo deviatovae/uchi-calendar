@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { CalendarBar } from './CalendarBar.tsx';
 import { CalendarPanel } from './CalendarPanel.tsx';
 import { FlxCenter } from '../styles.ts';
+import { Footer } from './Footer.tsx';
 
 const CalendarWrapper = styled.div`
   ${FlxCenter};
   margin: 0 auto;
-  flex: 1 1 auto;
   max-width: ${theme.contentMaxWidth};
   min-width: ${theme.contentMinWidth};
   background-color: ${theme.colors.bgMain};
@@ -20,6 +20,8 @@ const CalendarWrapper = styled.div`
 const CalendarContent = styled.div`
   ${FlxCenter};
   flex-direction: column;
+  height: 100vh;
+  flex-grow: 1;
 `;
 
 const CalendarHeader = styled.div`
@@ -51,6 +53,7 @@ export const Calendar = () => {
         </CalendarHeader>
         <CalendarBar />
         <CalendarPanel />
+        <Footer />
       </CalendarContent>
     </CalendarWrapper>
   );

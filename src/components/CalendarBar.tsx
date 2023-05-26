@@ -58,6 +58,7 @@ const Day = styled(ListItem)<{ isToday : boolean }>`
 
 const Date = styled.div`
   font-size: 1.1rem;
+  padding: 0 10px;
   font-weight: 500;
   text-align: center;
 `;
