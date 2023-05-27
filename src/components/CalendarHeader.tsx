@@ -4,6 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { useCalendarContext } from './CalendarContext.tsx';
 import moment from 'moment';
 import { FlxCenter } from '../styles.ts';
+import { FORMAT } from '../consts.ts';
 
 const Header = styled.div`
   ${FlxCenter};
@@ -32,14 +33,13 @@ const AddEventIcon = styled(AddIcon)`
 export const CalendarHeader = () => {
   const { addEvent } = useCalendarContext();
   const handleClick = () => {
-    const format = 'YYYY-MM-DD HH:mm:ss'
-    const date = prompt(`Please, enter the date (${format})`);
+    const date = prompt(`Please, enter the date (${FORMAT})`);
     if (!date) {
       alert('No date provided');
       return;
     }
 
-    const checkedDate = moment(date, format);
+    const checkedDate = moment(date, FORMAT);
     if (!checkedDate.isValid()) {
       alert('Invalid date');
       return;

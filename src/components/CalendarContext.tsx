@@ -1,9 +1,9 @@
 import { createContext, ReactNode, useCallback, useContext, useState } from 'react';
 import moment from 'moment';
+import { EVENT_KEY_FORMAT } from '../consts.ts';
 
 type Event = { date: number };
 type Events = { [key: string]: Event };
-export const EVENT_KEY_FORMAT = 'YYYY-MM-DD HH';
 
 interface CalendarContextProps {
   setToday: () => void;

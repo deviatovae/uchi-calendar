@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import theme from '../theme.ts';
 import moment from 'moment';
-import { EVENT_KEY_FORMAT, useCalendarContext } from './CalendarContext.tsx';
+import { useCalendarContext } from './CalendarContext.tsx';
 import { useCallback } from 'react';
+import { EVENT_KEY_FORMAT, FORMAT } from '../consts.ts';
 
 const CellItem = styled.div`
   display: flex;
@@ -49,18 +50,27 @@ interface EventCellProps {
 }
 
 export const EventCell = ({ dateTime }: EventCellProps) => {
-  const { events, selectEvent, selectedEvent } = useCalendarContext();
+  const { events, selectEvent, selectedEvent, addEvent } = useCalendarContext();
   const key = dateTime.format(EVENT_KEY_FORMAT);
   const event = events[key];
   const isSelected = key === selectedEvent;
 
-  const pickEvent = useCallback(() => {
-    selectEvent(key);
-  }, [key, selectEvent]);
+  const handleClick = useCallback(() => {
+    if (event) {
+      selectEvent(key);
+      return;
+    }
+
+    const shouldAddEvent = confirm(`Want to add an event at ${dateTime.format(FORMAT)}?`);
+    if (shouldAddEvent) {
+      addEvent(dateTime);
+    }
+
+  }, [event, dateTime, selectEvent, key, addEvent]);
 
   return (
     <ECell>
-      <Content hasEvent={!!event} isSelected={isSelected} onClick={pickEvent} />
+      <Content hasEvent={!!event} isSelected={isSelected} onClick={handleClick} />
     </ECell>
   );
 };
