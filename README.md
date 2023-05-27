@@ -1,4 +1,6 @@
-# interview-calendar
+# interview-calendar 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/036ad9e4-2684-4dac-b327-888d8dfd32c4/deploy-status)](https://app.netlify.com/sites/deviativae-uchi-calendar/deploys)  
+https://deviativae-uchi-calendar.netlify.app/
 
 ## Веб приложение с недельным календарем
 Нужно реализовать статичное веб приложение (SPA) используя create-react-app, React, styled-components и выложить его на Heroku.
