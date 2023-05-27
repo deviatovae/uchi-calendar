@@ -35,7 +35,7 @@ export const useCalendarContext = () => useContext(CalendarContext);
 
 export const CalendarProvider = ({ children }: { children: ReactNode }) => {
   const now = moment();
-  const [weekStart, setWeekStart] = useState(now.startOf('week'));
+  const [weekStart, setWeekStart] = useState(now.clone().startOf('week'));
   const week = new Array(7).fill(weekStart).map((_, index) => weekStart.clone().add(index, 'day'));
   const [events, setEvents] = useState<Events>({});
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
