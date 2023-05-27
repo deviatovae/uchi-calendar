@@ -32,11 +32,13 @@ const BottomPanelContent = styled.div`
   }
 `
 export const Footer = () => {
-  const { setToday } = useContext(CalendarContext);
+  const { setToday, selectedEvent, deleteEvent } = useContext(CalendarContext);
+
   return (
     <BottomPanel>
       <BottomPanelContent>
         <span onClick={setToday}>Today</span>
+        {selectedEvent && <span onClick={deleteEvent}>Delete</span>}
       </BottomPanelContent>
     </BottomPanel>
   )
