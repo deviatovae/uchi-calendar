@@ -93,7 +93,7 @@ export const CalendarBar = () => {
       </List>
       <List>
         <ListItem/>
-        {week.map((day, i) => <DayWrapper key={i}><Day isToday={!now.diff(day, 'day')}>{day.format('D')}</Day></DayWrapper>)}
+        {week.map((day, i) => <DayWrapper key={i}><Day isToday={now.isSame(day, 'day')}>{day.format('D')}</Day></DayWrapper>)}
       </List>
       <List isDate>
         <ArrowBefore fontSize="large" sx={{ fill: ` ${theme.colors.highlight}` }} onClick={() => updateWeekStart()}/>

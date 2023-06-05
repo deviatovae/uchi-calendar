@@ -41,7 +41,7 @@ export const CalendarProvider = ({ children }: { children: ReactNode }) => {
   const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
 
   const setToday = useCallback(() => {
-    setWeekStart(now);
+    setWeekStart(now.clone().startOf('week'));
   }, [now, setWeekStart]);
 
   const addEvent = useCallback((date: moment.Moment) => {
